@@ -1,11 +1,29 @@
-#include "user_utils.h"
-
-
-void delay_ms(uint32_t delay_time)
+#include <avr/io.h>
+#include<util/delay.h>
+int main(void)
 {
-	uint32_t units = 0;
-	for (units = 0; units <= delay_time; units++)
-	{
-		_delay_ms(1);
-	}
+
+    DDRB|=(1<<PB0);
+    DDRB&=~(2<<PD0);
+    DDRB&=~(4<<PD0);
+    PORTD|=(2<<PD0);
+    PORTD|=(4<<PD0);
+
+    while(1)
+    {
+        if(!(PIND&(2<<PD0))&& !(PIND & !(PIND & (4<<PD0))))
+        {
+
+            PORTB|=(1<<PB0);
+            _delay_ms(2000);
+
+        }
+        else
+        {
+            PORTB&=~(1<<PB0);
+            _delay_ms(2000);
+        }
+    }
+
+    return 0;
 }
