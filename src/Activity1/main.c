@@ -1,29 +1,28 @@
-#include <avr/io.h>
-#include<util/delay.h>
-int main(void)
+#include<avr/io.h>
+int main()
 {
-    DDRB|=(1<<PB0);
-    DDRD&=~(2<<PD0);
-    DDRD&=~(4<<PD0);
-    PORTD|=(2<<PD0);
-    while(1)
+    DDRB |= (1<<PB0); /* configuring port B as output */
+    DDRD |= (0<<PD2);
+    DDRD |= (0<<PD4);/* configure PD2 and PD4 of port D as input */
+    PORTB &= ~(1<<PB0); /*write 0 to port B */
+    while(1){
+    if(PIND & 1<<PD2)/*PIND is Used for gpio read */
     {
-        if(!(PIND&(2<<PD0))&& !(PIND & !(PIND & (4<<PD0))))
+        if(PIND & 1<<PD4)
         {
-
-            PORTB|=(1<<PB0);
-            _delay_ms(2000);
-
+            PORTB |= (1<<PB0);/*if both buttons are selected led turns on*/
         }
         else
-        {
-            PORTB&=~(1<<PB0);
-            _delay_ms(2000);
-        }
+        PORTB &= ~(1<<PB0);
     }
-
-
-
-
+    else
+        PORTB &= ~(1<<PB0);
+    }
     return 0;
 }
+
+
+
+
+
+
