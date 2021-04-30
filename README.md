@@ -1,11 +1,15 @@
 # Embedded C Programming Examples with Continuous Integration and Code Quality
 
 # Car Seat Heater (Heating control system)
-
-[06623471.pdf](https://github.com/vinaybc/Emb-C/files/6403320/06623471.pdf)
-
-
 The heat control system is basically used to control the temperature of a car seat. When a user or driver of the car gets seated on a car, the button sensor gets activated. After that, the user gets access to turn on the heater. The temperature sensor keeps monitoring the temperature and sends the analog value to the microcontroller. The microcontroller processes the analog input of the temperature sensor and outputs a temperature value through serial communication. All the activities of the control system are done on a microcontroller called Atmega328.
+
+<img width="636" alt="activity_list" src="https://user-images.githubusercontent.com/65846052/116657001-4f4ed400-a9ab-11eb-8c5b-40e33b87674c.png">
+## Problem Statement
+When the two switches are closed, the first LED should glows indicating the actuation of the system and the heater.
+Next the analog input from the temperature sensor to be received and digitized.
+The digitized temperature input has to be visualized Pulse Width Modulation.
+The corresponding temperature values based on the digitized temperature input has to be transmitted by the UART protocol and data shoul be displayd on serial monitor
+
 
 ## In Action
 
