@@ -1,7 +1,7 @@
   
 /**
  * @file activity1.c 
- * @author nuPURohit (https://github.com/nuPURohit/Embedded_C_LTTS.git)
+ * @author Vinay B C
  * @brief 
  * @version 0.1
  * @date 2021-04-24
