@@ -1,32 +1,36 @@
-PROJ_NAME = Embedded_C
-
-BUILD_DIR = build
+PROJ_NAME = EmbeddedCaseStudy
+ELFFILE = $(PROJ_NAME).elf
+BUILD_DIR = Build
 
 # All Source code files
-SRC = src/activity1.c\
+SRC = project_main.c\
+src/activity1.c\
 src/activity2.c\
 src/activity3.c\
-main.c\
-
+src/activity4.c
 
 # All header file paths
 INC = -I inc
 
 # Find out the OS and configure the variables accordingly
 ifdef OS	# All configurations for Windwos OS
-# Correct the path based on OS
+   # Delete command 
+   RM = rm -rf
+   # Correct the path based on OS
    FixPath = $(subst /,\,$1)
-# Name of the compiler used
+   # Name of the compiler used
    CC = avr-gcc.exe
-# Name of the elf to hex file converter used
-   AVR_OBJ_CPY = avr-objcopy.exe
+   # Name of the elf to hex file converter used
+   AVR_OBJ_CPY = avr-objcopy
 else #All configurations for Linux OS
    ifeq ($(shell uname), Linux)
-# Correct the path based on OS
+   	  # Delete command
+      RM = rm -rf			
+	  # Correct the path based on OS
       FixPath = $1				
-# Name of the compiler used
+	  # Name of the compiler used
 	  CC = avr-gcc
-# Name of the elf to hex file converter used
+	  # Name of the elf to hex file converter used
 	  AVR_OBJ_CPY = avr-objcopy 
    endif
 endif
@@ -35,22 +39,26 @@ endif
 .PHONY:all analysis clean doc
 
 all:$(BUILD_DIR)
-# Compile the code and generate the ELF file
-	$(CC) -g -Wall -Os -mmcu=atmega328 -DF_CPU=16000000UL  $(INC) $(SRC) -o $(call FixPath,$(BUILD_DIR)/$(PROJ_NAME).elf)
+	# Compile the code and generate the ELF file
+	$(CC) -g -Wall -Os -mmcu=atmega328  $(INC) $(SRC) -o $(call FixPath,$(BUILD_DIR)/$(PROJ_NAME).elf)
 
 $(BUILD_DIR):
-# Create directory to store the built files
+	# Create directory to store the built files
 	mkdir $(BUILD_DIR)
 
+hexfile:
+	#Creates activity2.hex file
+	$(AVR_OBJ_CPY) -O ihex $(BUILD_DIR)/$(ELFFILE) $(BUILD_DIR)/$(PROJ_NAME).hex
+
 analysis: $(SRC)
-# Analyse the code using Cppcheck command line utility
+	#Analyse the code using Cppcheck command line utility
 	cppcheck --enable=all $^
 
 doc:
-# Build the code code documentation using Doxygen command line utility
+	#Build the code code documentation using Doxygen command line utility
 	make -C documentation
 
 clean:
-# Remove all the build files and generated document files
-	rm -rf $(call FixPath,$(BUILD_DIR)/*)
+	# Remove all the build files and generated document files
+	$(RM) $(call FixPath,$(BUILD_DIR))
 	make -C documentation clean
