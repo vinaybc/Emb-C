@@ -1,32 +1,27 @@
-/**
- * @file activity2.c
- * @author Vinay B  C
- * @version 0.1
- * @date 2021-04-28
- * 
- * @copyright Copyright (c) 2021
- * 
- */
-#include<avr/io.h>
+#include "activity1.h"
 #include "activity2.h"
 
-uint16_t ReadADC(uint8_t ch)
+#define CONVERSION_IS_INCOMPLETE  ADCSRA & (1<<ADSC)
+//#define (1<<REFS0)
+
+void InitializeADC()
 {
-    //Select ADC Channel ch must be 0-7
-    ADMUX&=0xf8;
-    ch=ch&0b00000111;
-    ADMUX|=ch;
-    //Start single conversion
-    ADCSRA|=(1<<ADSC);
-    //Wait for conversion to complete
-    while(!(ADCSRA & (1<<ADIF)));
-    //Clear ADIF by writing one to it
-    ADCSRA|=(1<<ADIF);
-    return(ADC);
+    // Select Vref=AVcc
+    ADMUX |= (1<<REFS0);
+    //set prescaller to 128 and enable ADC
+    ADCSRA |= (1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0)|(1<<ADEN);
 }
-void InitADC()
+uint16_t ReadADC(uint8_t channel)
 {
-    ADMUX=(1<<REFS0);
-    ADCSRA=(1<<ADEN)|(7<<ADPS0);
-    
+    InitializeADC();/* Initialize Peripherals for ADC */
+    //select ADC channel with safety mask
+    ADMUX &= 0xF8;
+    //single conversion mode
+    channel &= 0x07;
+    ADMUX &= channel;
+    ADCSRA |= (1<<ADSC);
+    // wait until ADC conversion is complete
+    while(CONVERSION_IS_INCOMPLETE);
+    ADCSRA|=(1<<ADIF);
+    return ADC;
 }
