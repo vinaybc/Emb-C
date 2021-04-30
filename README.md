@@ -15,11 +15,14 @@ The heat control system is basically used to control the temperature of a car se
 
 ## In Action
 
-## Activity 1
+## All four activities combined action
 
 |ON|OFF|OFF|OFF|
-|:--:|:--:|:--:|:--:|
-|![2021-04-28 (5)](https://user-images.githubusercontent.com/65846052/116356450-e46d9380-a818-11eb-81c8-d5387b6d10f1.png)|[![Cppcheck](https://github.com/vinaybc/Emb-C/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/vinaybc/Emb-C/actions/workflows/cppcheck.yml)|![2021-04-28 (4)](https://user-images.githubusercontent.com/65846052/116356574-15e65f00-a819-11eb-99b4-1f60f5d3c898.png)|![2021-04-28 (7)](https://user-images.githubusercontent.com/65846052/116356614-21d22100-a819-11eb-95f0-11308a846152.png)|
+|:--:|:--:|
+|![Project_1](https://user-images.githubusercontent.com/65846052/116678153-a3b37d00-a9c6-11eb-90b5-1a762b43b25b.png)| ![Project_2](https://user-images.githubusercontent.com/65846052/116678197-ac0bb800-a9c6-11eb-80ad-ca2a8eff4369.png)|
+
+
+
 
 
 
