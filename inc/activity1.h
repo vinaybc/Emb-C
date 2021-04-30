@@ -28,8 +28,7 @@
 #define LED_PORT (PORTB)    /**< LED Port Number */
 #define LED_PIN  (PORTB0)   /**< LED Pin number  */
 #define SENSOR_ON !(PIND&(1<<PD0)) // Switch1 ON
-#define HEAT_ON !(PIND&(1<<PD1)) // Switch2 ON
-
+#define HEAT_ON !(PIND&(1<<PD1)) // Switch2 ONn
 /**
  * Function Definitions
  */
