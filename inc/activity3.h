@@ -7,7 +7,7 @@
  * 
  * @copyright Copyright (c) 2021
  * 
- */
+ **/
 #ifndef __activity3_h__
 #define __activity3_h__
 #include<avr/io.h>
