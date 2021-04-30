@@ -2,7 +2,8 @@
 
 |ON|OFF|
 |:--:|:--:|
-|![Project_1](https://user-images.githubusercontent.com/65846052/116677329-b7121880-a9c5-11eb-97aa-5d588dd047cb.png)|![Project_2](https://user-images.githubusercontent.com/65846052/116677355-be392680-a9c5-11eb-85bf-b651c3a70e9b.png|
+|![Project_1](https://user-images.githubusercontent.com/65846052/116677707-25ef7180-a9c6-11eb-89a1-7b3fe7b61b39.png)|![Project_2](https://user-images.githubusercontent.com/65846052/116677779-3b649b80-a9c6-11eb-80a8-31198c4caed2.png)|
+
 
 ## Code 
 ```while(1){
