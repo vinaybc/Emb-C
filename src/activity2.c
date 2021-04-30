@@ -1,6 +1,6 @@
 /**
  * @file activity2.c
- * @author Vinay B C
+ * @author Vinay B  C
  * @version 0.1
  * @date 2021-04-28
  * 
