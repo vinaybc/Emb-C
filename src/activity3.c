@@ -1,55 +1,36 @@
-/**
- * @file activity3.c
- * @author Vinay B C
- * @brief Configure the PWM wave according to temperature
- * @version 0.1
- * @date 2021-04-29
- * 
- * @copyright Copyright (c) 2021
- * 
- */
-#include"activity3.h"
-#include<util/delay.h>
-#include<avr/io.h>
+#include "activity1.h"
+#include "activity3.h"
 
-void InitPWM(void)
-{
-    /*Configuring the registers and ports*/
-    TCCR1A|=(1<<COM1A1)|(1<<WGM10)|(1<<WGM11);
-    TCCR1B|=(1<<WGM12)|(1<<CS11)|(1<<CS10);
+#define DUTY_CYCLE(Percent) (1024*Percent/100)
+#define WRITE_PWM OCR1A
+
+
+void InitializePWM(void){
+    TCCR1A=(1<<COM1A1)|(1<<WGM11)|(1<<WGM10);
+    TCCR1B=(1<<CS11)|(1<<WGM12)|(1<<CS10);
     DDRB|=(1<<PB1);
-
 }
-void OutPWM (uint16_t ADC_val)
-{
-    
 
-    if((ADC_val>=0) && (ADC_val<=209)){
-
-        OCR1A = 205; //20% duty cycle
-        
-        _delay_ms(20);
+char GeneratePWM(uint16_t Temperature){
+    InitializePWM();/* Initialize Peripherals for PWM */
+    if(Temperature<=200){
+        WRITE_PWM=DUTY_CYCLE(20.0);//PWM of Duty cycle 20%
+        DelayMilliSecond(200);
+        return 'a';
     }
-    else if((ADC_val>=210) && (ADC_val<=509)){
-
-        OCR1A = 410; //40% duty cycle
-        
-       _delay_ms(20);
+    else if(Temperature>200 && Temperature<=500){
+        WRITE_PWM=DUTY_CYCLE(40.0);//PWM of Duty cycle 40%
+        DelayMilliSecond(200);
+        return 'b';
     }
-    else if((ADC_val>=510) && (ADC_val<=709)){
-
-        OCR1A = 717;//70% duty cycle
-        
-        _delay_ms(20);
-    }
-    else if((ADC_val>=710) && (ADC_val<=1024)){
-
-        OCR1A = 973; //95% duty cycle
-        
-        _delay_ms(20);
+    else if(Temperature>500 && Temperature<=700){
+        WRITE_PWM=DUTY_CYCLE(70.0);//PWM of Duty cycle 70%
+        DelayMilliSecond(200);
+        return 'c';
     }
     else{
-        OCR1A = 0; //0% output
-        
+        WRITE_PWM=DUTY_CYCLE(95.0);//PWM of Duty cycle 95%
+        DelayMilliSecond(200);
+        return 'd';
     }
 }
